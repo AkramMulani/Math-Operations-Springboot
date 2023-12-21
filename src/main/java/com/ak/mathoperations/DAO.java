@@ -26,14 +26,16 @@ public class DAO {
     public long addOperation(MathOperation operation) {
         long i;
         long id = getNewId();
-        try {
-            String query = "INSERT INTO "+table+" VALUES("
-                +id+",'"+operation.getName()+"','"
-                +operation.getExpression()+"','"+operation.getTimestamp()+"')";
-            statement.executeUpdate(query);
-            // System.err.println("Adding operation: "+i);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+        if (!operation.getName().equals("") && !operation.getExpression().equals("")) {
+            try {
+                String query = "INSERT INTO "+table+" VALUES("
+                    +id+",'"+operation.getName()+"','"
+                    +operation.getExpression()+"','"+operation.getTimestamp()+"')";
+                statement.executeUpdate(query);
+                // System.err.println("Adding operation: "+i);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
         if (checkId(id)==1){
             i = 1;
