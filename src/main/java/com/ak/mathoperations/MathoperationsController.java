@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/operations")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = {"https://localhost:3000","https://AkramMulani.github.io/Math-Operations-React"})
 public class MathoperationsController {
     private static final DAO dao = new DAO();
     private MathOperation operation;
@@ -33,10 +34,10 @@ public class MathoperationsController {
         return i;
     }
 
-    @PostMapping("/del/{name}")
-    public Long deleteOperation(@PathVariable String name) {
-        long i=-1;
-        i = dao.deleteOperation(name);
+    @DeleteMapping("/del/{id}")
+    public Long deleteOperation(@PathVariable Long id) {
+        Long i;
+        i = dao.deleteOperation(id);
         return i;
     }
     

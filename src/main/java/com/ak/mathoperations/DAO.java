@@ -24,30 +24,42 @@ public class DAO {
     }
 
     public long addOperation(MathOperation operation) {
-        long i=-1;
+        long i;
+        long id = getNewId();
         try {
             String query = "INSERT INTO "+table+" VALUES("
-                +getNewId()+",'"+operation.getName()+"','"
+                +id+",'"+operation.getName()+"','"
                 +operation.getExpression()+"','"+operation.getTimestamp()+"')";
-            i = statement.executeUpdate(query);
+            statement.executeUpdate(query);
             // System.err.println("Adding operation: "+i);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        if (checkId(id)==1){
+            i = 1;
+        } else {
+            i = -1;
+        }
         return i;
     }
 
-    public long deleteOperation(String name) {
-        long i = -1;
+    public Long deleteOperation(Long id) {
+        long i;
+        if (checkId(id)==-1) {
+            i = -1;
+        } else {
+            i = 1;
         try {
             String query = "DELETE FROM "+table
-                +" WHERE op_name='"+name+"'";
-            i = statement.executeUpdate(query);
+                +" WHERE id="+id;
+            long res = statement.executeUpdate(query);
+            if (res>=0) i = 1;
             // System.err.println("Deleting operation: "+i);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+            System.out.println(e.getMessage());
+        }}
         return i;
+        
     }
 
     public List<MathOperation> getOperations() {
@@ -56,10 +68,12 @@ public class DAO {
             String query = "SELECT * FROM "+table;
             set = statement.executeQuery(query);
             while (set.next()) {
+                long id = set.getInt("id");
                 String name = set.getString("op_name");
                 String expression = set.getString("op_expression");
                 String timestamp = set.getString("op_time_stamp");
                 MathOperation operation = new MathOperation(name,expression);
+                operation.setId(id);
                 operation.setTimestamp(timestamp);
                 operations.add(operation);
             }
@@ -81,5 +95,21 @@ public class DAO {
             System.out.println(e.getMessage());
         }
         return i+1;
+    }
+
+    private int checkId(long id) {
+        try {
+            String query = "SELECT id FROM "+table;
+            set = statement.executeQuery(query);
+            while(set.next()) {
+                if (id==set.getInt("id")){
+                    return 1;
+                }
+            }
+            return -1;
+        } catch(Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return -1;
     }
 }

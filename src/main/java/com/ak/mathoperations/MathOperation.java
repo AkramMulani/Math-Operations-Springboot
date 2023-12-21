@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MathOperation {
+    private long id;
     private String name;
     private String expression;
     private String datetime;
@@ -16,6 +17,14 @@ public class MathOperation {
         datetime = LocalDateTime.now().format(formatter);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -42,7 +51,7 @@ public class MathOperation {
 
     @Override
     public String toString() {
-        return "MathOperation [name=" + name + ", expression=" + expression + ", timestamp=" + datetime + "]";
+        return "MathOperation [id="+id+"name=" + name + ", expression=" + expression + ", timestamp=" + datetime + "]";
     }
 
     public int getLiterals() {

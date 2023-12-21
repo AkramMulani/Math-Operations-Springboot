@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // You can configure specific endpoints instead of "/**" if needed
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://localhost:3000","https://www.thunderclient.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true)
