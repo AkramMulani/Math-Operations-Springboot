@@ -73,7 +73,7 @@ public class DAO {
                 long id = set.getInt("id");
                 String name = set.getString("op_name");
                 String expression = set.getString("op_expression");
-                String timestamp = set.getString("op_time_stamp");
+                String timestamp = set.getString("op_timestamp");
                 MathOperation operation = new MathOperation(name,expression);
                 operation.setId(id);
                 operation.setTimestamp(timestamp);
