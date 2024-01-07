@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAO {
-    private String url = "jdbc:mysql://localhost:3306/kpit";
+    private String url = "jdbc:mysql://127.0.0.1:3306/kpit";
     private String user = "sample";
     private String password = "sample@123";
     private Connection connection;

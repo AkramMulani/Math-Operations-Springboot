@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/operations")
-@CrossOrigin(origins = {"https://localhost:3000","https://AkramMulani.github.io/Math-Operations-React"})
+@CrossOrigin(origins = {"https://localhost:3000","http://192.168.57.82:3000","https://AkramMulani.github.io/Math-Operations-React"})
 public class MathoperationsController {
     private static final DAO dao = new DAO();
     private MathOperation operation;
